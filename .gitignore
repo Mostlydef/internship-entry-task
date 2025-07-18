@@ -1,0 +1,59 @@
+# Build output
+bin/
+obj/
+out/
+
+# User-specific files
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+# OS generated files
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+
+# Environment files
+.env
+.env.*
+
+# Rider / VS Code / VS
+.idea/
+.vscode/
+*.code-workspace
+
+# Test results
+TestResults/
+*.coverage
+*.coveragexml
+
+# Docker
+*.pid
+docker-compose.override.yml
+
+# EF Core Migrations metadata
+Migrations/
+
+# NCrunch
+.ncrunchproject
+.ncrunchsolution
+*.ncrunch*
+
+# JetBrains Rider
+.idea/
+
+# Backup & temp files
+*.bak
+*.tmp
+*.swp
+
+# Others
+_ReSharper*/
+*.DotSettings.user
+.vs
+
+# Git files
+*.orig

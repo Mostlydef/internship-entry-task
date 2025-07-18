@@ -1,0 +1,20 @@
+FROM mcr.microsoft.com/dotnet/sdk:9.0 AS ef
+WORKDIR /src
+
+RUN dotnet tool install -g dotnet-ef
+
+ENV PATH="$PATH:/root/.dotnet/tools"
+
+COPY ["Web/Web.csproj", "Web/"]
+COPY ["Infrastructure/Infrastructure.csproj", "Infrastructure/"]
+COPY ["Application/Application.csproj", "Application/"]
+COPY ["Models/Domain.csproj", "Models/"]
+
+
+RUN dotnet restore "Infrastructure/Infrastructure.csproj"
+
+COPY . .
+
+WORKDIR /src/Infrastructure
+
+ENTRYPOINT ["dotnet-ef"]

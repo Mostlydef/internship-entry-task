@@ -1,0 +1,42 @@
+﻿version: '3.4'
+
+services:
+  db:
+    image: postgres
+    restart: always
+    environment:
+        POSTGRES_USER: postgres
+        POSTGRES_PASSWORD: tictactoe
+        POSTGRES_DB: tictactoe
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+  ef:
+    build:
+      context: .
+      dockerfile: Dockerfile.ef       
+    command: database update --startup-project ../Web
+    depends_on:
+      - db
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ConnectionStrings__DefaultConnection=Host=db;Port=5432;Username=postgres;Password=tictactoe;Database=tictactoe
+
+  web:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "8080:8080"
+      - "8081:8081"
+    depends_on:
+      - db
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - GameSettings__BoardSize=3
+      - GameSettings__WinCondition=3
+      - ConnectionStrings__DefaultConnection=Host=db;Port=5432;Username=postgres;Password=tictactoe;Database=tictactoe
+
+volumes:
+ pgdata: 
