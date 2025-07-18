@@ -34,9 +34,6 @@ TestResults/
 *.pid
 docker-compose.override.yml
 
-# EF Core Migrations metadata
-Migrations/
-
 # NCrunch
 .ncrunchproject
 .ncrunchsolution
